@@ -1,10 +1,21 @@
-<!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Gym Keeper</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/mainscreen.css' %}">
 </head>
 <body>
+    <ul>
+        <li><a href="/">Qwe</a></li>
+        <li><a href="/">Qwe</a></li>
+        <li><a href="/">Qwe</a></li>
+        <li><a href="/">Qwe</a></li>
+    </ul>
+
     <div>
         {% for post in posts %}
             <div>
