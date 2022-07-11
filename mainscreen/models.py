@@ -10,7 +10,6 @@ class Post(models.Model):
     reps_count = models.IntegerField()
     weight = models.IntegerField()
     created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
         self.created_date = timezone.now()
