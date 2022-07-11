@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,18 +11,19 @@
 </head>
 <body>
     <ul>
-        <li><a href="/">Qwe</a></li>
-        <li><a href="/">Qwe</a></li>
-        <li><a href="/">Qwe</a></li>
-        <li><a href="/">Qwe</a></li>
+        <li><a href="/">Main</a></li>
+        <li><a href="/">Photo</a></li>
+        <li><a href="/">Notes</a></li>
+        <li><a href="/">Sign Out</a></li>
     </ul>
 
     <div>
         {% for post in posts %}
             <div>
-                <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaksbr }}</p>
+
+                <h1><a href="">{{ post.training_name }}</a></h1>
+                <p>Training date: {{ post.published_date }}</p>
+                <p>{{ post.exercise|linebreaksbr }} - {{ post.set|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
             </div>
         {% endfor %}
     </div>

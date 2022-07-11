@@ -48,11 +48,13 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    # bootstrap4
+    'bootstrap4',
 ]
 
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
-
+#LOGIN_URL = 'http://127.0.0.1:8000/accounts/login/'
 
 # # Provider specific settings
 # SOCIALACCOUNT_PROVIDERS = {
