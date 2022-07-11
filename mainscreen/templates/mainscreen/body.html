@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gym Keeper</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/mainscreen.css' %}">
 </head>
 <body>
-    <div>
-        {% for post in posts %}
-            <div>
-                <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </div>
-        {% endfor %}
-    </div>
+    <ul>
+        <li><a href="/">Main</a></li>
+        <li><a href="/">Photo</a></li>
+        <li><a href="/">Notes</a></li>
+        <li><a href="/">Sign Out</a></li>
+    </ul>
 
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

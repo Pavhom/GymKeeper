@@ -1,0 +1,9 @@
+{% extends 'mainscreen/body.html' %}
+
+{% block content %}
+    <div>
+        <h1>{{ post.training_name }}</h1>
+        <p>Training date: {{ post.created_date }}</p>
+        <p>{{ post.exercise|linebreaksbr }} - {{ post.set|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
+    </div>
+{% endblock %}

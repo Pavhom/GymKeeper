@@ -1,31 +1,10 @@
-{% load static %}
-
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gym Keeper</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/mainscreen.css' %}">
-</head>
-<body>
-    <ul>
-        <li><a href="/">Main</a></li>
-        <li><a href="/">Photo</a></li>
-        <li><a href="/">Notes</a></li>
-        <li><a href="/">Sign Out</a></li>
-    </ul>
-
-    <div>
-        {% for post in posts %}
-            <div>
-
-                <h1><a href="">{{ post.training_name }}</a></h1>
-                <p>Training date: {{ post.published_date }}</p>
-                <p>{{ post.exercise|linebreaksbr }} - {{ post.set|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
-            </div>
-        {% endfor %}
-    </div>
-</body>
-</html>
+{% extends 'mainscreen/body.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div>
+            <h1><a href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }}</a></h1>
+            <p>Training date: {{ post.created_date }}</p>
+            <p>{{ post.exercise|linebreaksbr }} - {{ post.set|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
+        </div>
+    {% endfor %}
+{% endblock %}
