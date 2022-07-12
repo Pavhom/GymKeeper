@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/'
 #LOGIN_URL = 'http://127.0.0.1:8000/accounts/login/'
 
 # # Provider specific settings
