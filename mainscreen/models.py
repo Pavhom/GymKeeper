@@ -6,9 +6,9 @@ from django.utils import timezone
 class Post(models.Model):
     training_name = models.CharField(max_length=200)
     exercise = models.CharField(max_length=200)
-    sets_count = models.IntegerField()
-    reps_count = models.IntegerField()
-    weight = models.IntegerField()
+    sets_count = models.PositiveIntegerField(default=0)
+    reps_count = models.PositiveIntegerField(default=0)
+    weight = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(default=timezone.now)
 
     # def publish(self):

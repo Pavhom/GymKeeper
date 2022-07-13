@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     # bootstrap4
     'bootstrap4',
 ]
-
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/'
