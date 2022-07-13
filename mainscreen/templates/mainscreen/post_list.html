@@ -1,10 +1,12 @@
 {% extends 'mainscreen/body.html' %}
 {% block content %}
+    <div>Тут будет добавление</div>
+
     {% for post in posts %}
         <div>
-            <h1><a href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }}</a></h1>
-            <p>Training date: {{ post.created_date }}</p>
+            <h1><a href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }} - {{ post.created_date }}</a></h1>
             <p>{{ post.exercise|linebreaksbr }} - {{ post.sets_count|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
         </div>
+
     {% endfor %}
 {% endblock %}

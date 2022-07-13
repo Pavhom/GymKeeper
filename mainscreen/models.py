@@ -11,9 +11,10 @@ class Post(models.Model):
     weight = models.IntegerField()
     created_date = models.DateTimeField(default=timezone.now)
 
-    def publish(self):
-        self.created_date = timezone.now()
-        self.save()
+    # def publish(self):
+    #     self.created_date = timezone.now()
+    #     self.save()
 
     def __str__(self):
         return self.exercise
+

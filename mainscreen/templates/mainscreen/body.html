@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gym Keeper</title>
+    <title>Gym Keep</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/mainscreen.css' %}">
@@ -15,11 +15,12 @@
         <li><a href="/">Notes</a></li>
         <li><a href="{% url 'add_training' %}">Add training</a></li>
         <li><a href="http://127.0.0.1:8000/accounts/logout/">Sign Out</a></li>
+        <li><a href="{% url 'add_training' %}"><span class="glyphicon glyphicon-plus" ></span></a></li>
     </ul>
-
     <div>
         {% block content %}
         {% endblock %}
     </div>
+
 </body>
 </html>
