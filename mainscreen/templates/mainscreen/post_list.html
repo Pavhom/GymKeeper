@@ -4,7 +4,7 @@
         <div>
             <h1><a href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }}</a></h1>
             <p>Training date: {{ post.created_date }}</p>
-            <p>{{ post.exercise|linebreaksbr }} - {{ post.set|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
+            <p>{{ post.exercise|linebreaksbr }} - {{ post.sets_count|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
         </div>
     {% endfor %}
 {% endblock %}
