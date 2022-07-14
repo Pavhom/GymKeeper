@@ -28,8 +28,6 @@ def training_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'mainscreen/training_detail.html', {'post': post})
 
-def enter(request):
-    return render(request, 'mainscreen/enter.html')
 
 def add_training(request):
     if request.method == "POST":
