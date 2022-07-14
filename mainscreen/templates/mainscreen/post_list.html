@@ -6,4 +6,5 @@
             <p>{{ post.exercise|linebreaksbr }} - {{ post.sets_count|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
         </div>
     {% endfor %}
+{% include "mainscreen/pagination.html" with page=posts %}
 {% endblock %}
