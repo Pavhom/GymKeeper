@@ -2,7 +2,7 @@
 {% block content %}
     {% for post in posts %}
         <div class="main_content">
-<!--            <h1><a href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }} - {{ post.created_date }}</a></h1>-->
+            <h1><a href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }} - {{ post.created_date }}</a></h1>
             <p>{{ post.exercise|linebreaksbr }} - {{ post.sets_count|linebreaksbr }}x{{ post.reps_count|linebreaksbr }} - {{ post.weight|linebreaksbr }} kg</p>
         </div>
     {% endfor %}

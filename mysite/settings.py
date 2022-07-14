@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'mainscreen',
-    'account',
 
     # bootstrap4
     'bootstrap4',
