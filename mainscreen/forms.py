@@ -1,13 +1,20 @@
 from django import forms
 from .models import Post
 from django.forms import TextInput, NumberInput, ModelForm
+from .models import Exercise
 
 
-class PostForm(ModelForm):
+class ExerciseForm(ModelForm):
 
     class Meta:
-        model = Post
+        model = Exercise
         fields = ('exercise', 'sets_count', 'reps_count', 'weight')
+
+# class PostForm(ModelForm):
+#
+#     class Meta:
+#         model = Post
+#         fields = ('exercise', 'sets_count', 'reps_count', 'weight')
 
         # widgets = {
         #     "exercise": TextInput(attrs={'placeholder': 'Exercise'}),

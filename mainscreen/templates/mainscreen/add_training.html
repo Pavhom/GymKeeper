@@ -5,10 +5,7 @@
     <div class="field inline">
         <form method="POST" class="post-form">
             {% csrf_token %}
-            {{ form.exercise }}
-            {{ form.sets_count }}
-            {{ form.reps_count }}
-            {{ form.weight }}
+
 
             <div>
                 <button type="submit" class="save btn btn-default">Save</button>
