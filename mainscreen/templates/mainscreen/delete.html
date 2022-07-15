@@ -1,0 +1,14 @@
+{% extends 'mainscreen/body.html' %}
+
+{% block content %}
+    <div>
+        <h1>Delete training</h1>
+    </div> <hr>
+
+
+    <form method="post">
+        {% csrf_token %}
+
+        <button type="submit">Delete</button>
+    </form>
+{% endblock %}

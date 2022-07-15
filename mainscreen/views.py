@@ -2,6 +2,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
+from django.views.generic import DeleteView
 from datetime import date
 from .models import Post, Exercise
 from .forms import PostForm, ExerciseForm
@@ -54,6 +55,11 @@ def training_detail(request, pk):
         form = ExerciseForm()
     return render(request, 'mainscreen/training_detail.html', {'post': post, 'exercise': exercise, 'form': form})
 
+
+class TrainingDelete(DeleteView):
+    model = Post
+    success_url = 'http://127.0.0.1:8000/'
+    template_name = 'mainscreen/delete.html'
 
 # def add_training(request):
 #     if request.method == "POST":
