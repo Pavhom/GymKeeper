@@ -61,6 +61,7 @@ class TrainingDelete(DeleteView):
     success_url = 'http://127.0.0.1:8000/'
     template_name = 'mainscreen/delete.html'
 
+
 # def add_training(request):
 #     if request.method == "POST":
 #         form = PostForm(request.POST)
