@@ -10,11 +10,12 @@ class ExerciseForm(ModelForm):
         model = Exercise
         fields = ('exercise', 'sets_count', 'reps_count', 'weight')
 
-# class PostForm(ModelForm):
-#
-#     class Meta:
-#         model = Post
-#         fields = ('exercise', 'sets_count', 'reps_count', 'weight')
+
+class PostForm(ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('training_name', 'created_date')
 
         # widgets = {
         #     "exercise": TextInput(attrs={'placeholder': 'Exercise'}),
