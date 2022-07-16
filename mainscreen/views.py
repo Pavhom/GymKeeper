@@ -3,9 +3,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
 from django.views.generic import DeleteView
+from django.contrib.auth.views import LoginView, auth_logout
+from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
 from .models import Post, Exercise
 from .forms import PostForm, ExerciseForm
+
 # Create your views here.
 
 
@@ -67,14 +70,12 @@ class ExerciseDelete(DeleteView):
     success_url = 'http://127.0.0.1:8000/'
     template_name = 'mainscreen/exercise_delete.html'
 
-# def add_training(request):
-#     if request.method == "POST":
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.created_date = date.today()
-#             post.save()
-#             # return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = PostForm()
-#     return render(request, 'mainscreen/post_list.html', {'form': form})
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'mainscreen/login.html'
+
+
+def logout_user(request):
+    auth_logout(request)
+    return redirect('login')

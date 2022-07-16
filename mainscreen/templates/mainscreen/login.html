@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <h1>Log In</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>{{ form.non_field_errors }}</div>
+        <div>
+            <label>Username</label><br>
+            {{ form.username }}
+        </div>
+        <div>
+            <label>Password</label><br>
+            {{ form.password }}
+        </div><br>
+        <button type="submit">LogIn</button>
+    </form>
+    <p>Don't have an GymKeep account?</p>
+    <a href="/">Sign Up</a>
+</body>
+</html>
