@@ -2,9 +2,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, CreateView
 from django.contrib.auth.views import LoginView, auth_logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from datetime import date
 from .models import Post, Exercise
 from .forms import PostForm, ExerciseForm
@@ -71,6 +71,11 @@ class ExerciseDelete(DeleteView):
     template_name = 'mainscreen/exercise_delete.html'
 
 
+# class RegisterUser(LoginView):
+#     form_class = UserCreationForm
+#     template_name = 'mainscreen/register.html'
+#     success_url = 'mainscreen/login.html'
+
 class LoginUser(LoginView):
     form_class = AuthenticationForm
     template_name = 'mainscreen/login.html'
@@ -79,3 +84,4 @@ class LoginUser(LoginView):
 def logout_user(request):
     auth_logout(request)
     return redirect('login')
+
