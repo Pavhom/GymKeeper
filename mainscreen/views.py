@@ -62,6 +62,11 @@ class TrainingDelete(DeleteView):
     template_name = 'mainscreen/delete.html'
 
 
+class ExerciseDelete(DeleteView):
+    model = Exercise
+    success_url = 'http://127.0.0.1:8000/'
+    template_name = 'mainscreen/exercise_delete.html'
+
 # def add_training(request):
 #     if request.method == "POST":
 #         form = PostForm(request.POST)

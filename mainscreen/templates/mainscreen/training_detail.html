@@ -5,7 +5,7 @@
         <h1>{{ post.training_name }} - {{ post.created_date }}</h1>
     </div> <hr>
 {% for ex in exercise %}
-    {{ ex.exercise }}-{{ ex.sets_count }}-{{ ex.reps_count }}-{{ ex.weight }} <br>
+    {{ ex.exercise }}-{{ ex.sets_count }}-{{ ex.reps_count }}-{{ ex.weight }} <a href="{% url 'exercise_delete' ex.id %}">Delete</a><br>
 {% endfor %}
     <form action="" method="post">
         {% csrf_token %}
