@@ -2,16 +2,17 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.views.generic import DeleteView, CreateView
-from django.contrib.auth.views import LoginView, auth_logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.views import LoginView, auth_logout, login_required
+from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
 from .models import Post, Exercise
-from .forms import PostForm, ExerciseForm
+from .forms import PostForm, ExerciseForm, RegisterUserForm
 
 # Create your views here.
 
-
+@login_required
 def post_list(request):
     # display of all workouts
     posts = Post.objects.filter(created_date__lte=date.today()).order_by('-created_date')
@@ -71,10 +72,11 @@ class ExerciseDelete(DeleteView):
     template_name = 'mainscreen/exercise_delete.html'
 
 
-# class RegisterUser(LoginView):
-#     form_class = UserCreationForm
-#     template_name = 'mainscreen/register.html'
-#     success_url = 'mainscreen/login.html'
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'mainscreen/register.html'
+    success_url = reverse_lazy('login')
+
 
 class LoginUser(LoginView):
     form_class = AuthenticationForm
