@@ -16,13 +16,6 @@ class PostForm(ModelForm):
         model = Post
         fields = ('training_name', 'created_date')
 
-        # widgets = {
-        #     "exercise": TextInput(attrs={'placeholder': 'Exercise'}),
-        #     "sets_count": NumberInput(attrs={'placeholder': 'Sets count'}),
-        #     "reps_count": NumberInput(attrs={'placeholder': 'Reps count'}),
-        #     "weight": NumberInput(attrs={'placeholder': 'Weight'}),
-        # }
-
 
 class RegisterUserForm(UserCreationForm):
     username = CharField(label='Username', widget=TextInput(attrs={'class': 'form-input'}))
@@ -33,9 +26,3 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
-        # widgets = {
-        #     "username": TextInput(attrs={'class': 'form-input'}),
-        #     "email": EmailInput(attrs={'class': 'form-input'}),
-        #     "password1": PasswordInput(attrs={'class': 'form-input'}),
-        #     "password2": PasswordInput(attrs={'class': 'form-input'}),
-        # }

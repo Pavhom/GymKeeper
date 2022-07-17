@@ -13,10 +13,7 @@
         <li><a href="/">Main</a></li>
         <li><a href="/">Photo</a></li>
         <li><a href="/">Notes</a></li>
-        <li><a href="/">Add training</a></li>
-<!--        {% if request.user.is_authenticated %}-->
         <li>{{ user.username }} |<a href="{% url 'logout' %}">Sign Out</a></li>
-<!--        {% endif %}-->
     </ul>
     <div>
         {% block content %}

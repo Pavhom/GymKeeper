@@ -11,6 +11,7 @@ from .models import Post, Exercise
 from .forms import PostForm, ExerciseForm, RegisterUserForm
 
 # Create your views here.
+navbar = ['Main', 'Photo', 'Notes', 'Main',]
 
 @login_required
 def post_list(request):
