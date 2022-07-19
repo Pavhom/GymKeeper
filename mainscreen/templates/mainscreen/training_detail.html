@@ -1,15 +1,55 @@
 {% extends 'mainscreen/body.html' %}
 
 {% block content %}
+<div class="container mt-3">
     <div>
         <h1>{{ post.training_name }} - {{ post.created_date }}</h1>
     </div> <hr>
-{% for ex in exercise %}
-    {{ ex.exercise }}-{{ ex.sets_count }}-{{ ex.reps_count }}-{{ ex.weight }} <a href="{% url 'exercise_delete' ex.id %}">Delete</a><br>
-{% endfor %}
+    <table class="table" width="50%">
+        <thead>
+            <tr>
+                <th>Exercise</th>
+                <th>Sets count</th>
+                <th>Reps count</th>
+                <th>Weight</th>
+                <th>Delete?</th>
+            </tr>
+        </thead>
+
+        {% for ex in exercise %}
+        <tbody>
+            <tr>
+                <td>{{ ex.exercise }}</td>
+                <td>{{ ex.sets_count }}</td>
+                <td>{{ ex.reps_count }}</td>
+                <td>{{ ex.weight }}</td>
+                <td><a href="{% url 'exercise_delete' ex.id %}">Delete</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+<!--        {{ form.as_p }}-->
+        <div class="row">
+            <div>
+                <label>Exercise</label><br>
+                {{ form.exercise }}
+            </div>
+            <div>
+                <label>Sets count</label><br>
+                {{ form.sets_count }}
+            </div>
+            <div>
+                <label>Reps count</label><br>
+                {{ form.reps_count }}
+            </div>
+            <div>
+                <label>Weight</label><br>
+                {{ form.weight }}
+            </div>
+        </div>
         <button type="submit">Add exercise</button>
     </form>
+</div>
 {% endblock %}
