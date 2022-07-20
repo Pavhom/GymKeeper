@@ -23,7 +23,7 @@
                 <td>{{ ex.sets_count }}</td>
                 <td>{{ ex.reps_count }}</td>
                 <td>{{ ex.weight }}</td>
-                <td><a href="{% url 'exercise_delete' ex.id %}">Delete</a></td>
+                <td><a class="btn btn-danger btn-sm" role="button" href="{% url 'exercise_delete' ex.id %}">Delete</a></td>
             </tr>
         </tbody>
         {% endfor %}
