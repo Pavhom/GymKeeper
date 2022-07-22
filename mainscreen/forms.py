@@ -14,7 +14,7 @@ class ExerciseForm(ModelForm):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ('training_name', 'created_date')
+        fields = ('training_name',)
 
 
 class RegisterUserForm(UserCreationForm):
