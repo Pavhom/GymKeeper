@@ -29,3 +29,12 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.exercise
+
+
+class Note(models.Model):
+    note_author = models.ForeignKey(User, related_name='note_author', blank=True, null=True, on_delete=models.CASCADE)
+    note_text = models.CharField(default=None, max_length=400)
+    created_date = models.DateTimeField(default=timezone.now())
+
+    def __str__(self):
+        return self.note_text

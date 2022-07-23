@@ -6,8 +6,8 @@ from django.views.generic import DeleteView, CreateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
-from .models import Post, Exercise
-from .forms import PostForm, ExerciseForm, RegisterUserForm
+from .models import Post, Exercise, Note
+from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -20,13 +20,26 @@ def post_list(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            # post.created_date = date.today()
             post.author = request.user
             post.save()
             return redirect(post_list)
     else:
         form = PostForm()
     return render(request, 'mainscreen/post_list.html', {'posts': posts, 'form': form})
+
+
+def notes_list(request):
+    notes = Note.objects.filter(note_author=request.user, created_date__lte=timezone.now()).order_by('-created_date')
+    if request.method == "POST":
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.note_author = request.user
+            note.save()
+            return redirect(notes_list)
+    else:
+        form = NoteForm()
+    return render(request, 'mainscreen/notes.html', {'notes': notes, 'form': form})
 
 
 def training_detail(request, pk):

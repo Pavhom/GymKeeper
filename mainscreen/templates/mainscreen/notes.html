@@ -1,14 +1,13 @@
 {% extends 'mainscreen/body.html' %}
 {% block content %}
 <div class="container mt-3">
-    <h1>Enter training name</h1>
+    <h1>Leave a note</h1>
     <div class="field inline">
         <form action="" method="post">
             {% csrf_token %}
             <div class="row">
                 <div class="col-sm-3">
-                    {{ form.training_name }}
-<!--                    {{ form.created_date }}-->
+                    {{ form.note_text }}
                 </div>
                 <div class="col align-bottom">
                     <button type="submit" class="btn btn-success btn-sm">Save</button>
@@ -18,13 +17,13 @@
     </div>
     <hr>
 
-    {% for post in posts %}
+    {% for note in notes %}
         <div class="row main_content bg-dark text-white align-items-center">
             <div class="col text-break">
-                <h1><a class="btn btn-outline-light" role="button" href="{% url 'trainin_detail' pk=post.pk %}">{{ post.training_name }} - {{ post.created_date }}</a></h1>
+                <h1><a class="btn btn-outline-light" role="button" href="#">{{ note }}</a></h1>
             </div>
             <div class="col-sm-2">
-                <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' post.id %}">Delete</a>
+                <a class="btn btn-danger btn-sm" role="button" href="#">Delete</a>
             </div>
         </div>
     {% endfor %}

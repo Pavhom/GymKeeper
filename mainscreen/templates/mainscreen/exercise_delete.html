@@ -1,12 +1,15 @@
 {% extends 'mainscreen/body.html' %}
 
 {% block content %}
-    <div>
-        <h1>Delete exercise?</h1>
-    </div> <hr>
+<div class="container mt-3">
+    <h1>Delete exercise?</h1>
+    <hr>
+    <div class="field inline">
+        <form method="post">
+            {% csrf_token %}
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-    </form>
+            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

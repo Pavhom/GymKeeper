@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Exercise
+from .models import Post, Exercise, Note
 from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -15,6 +15,12 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ('training_name',)
+
+
+class NoteForm(ModelForm):
+    class Meta:
+        model = Note
+        fields = ('note_text',)
 
 
 class RegisterUserForm(UserCreationForm):

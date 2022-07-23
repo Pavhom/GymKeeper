@@ -32,24 +32,24 @@
         {% csrf_token %}
 <!--        {{ form.as_p }}-->
         <div class="row">
-            <div>
+            <div class="col-sm-2">
                 <label>Exercise</label><br>
                 {{ form.exercise }}
             </div>
-            <div>
+            <div class="col-sm-2">
                 <label>Sets count</label><br>
                 {{ form.sets_count }}
             </div>
-            <div>
+            <div class="col-sm-2">
                 <label>Reps count</label><br>
                 {{ form.reps_count }}
             </div>
-            <div>
+            <div class="col-sm-2">
                 <label>Weight</label><br>
                 {{ form.weight }}
             </div>
-        </div>
-        <button type="submit">Add exercise</button>
+        </div><br>
+        <button class="btn btn-success btn-sm" type="submit">Add exercise</button>
     </form>
 </div>
 {% endblock %}
