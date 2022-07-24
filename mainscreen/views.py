@@ -58,6 +58,11 @@ def training_detail(request, pk):
     return render(request, 'mainscreen/training_detail.html', {'post': post, 'exercise': exercise, 'form': form})
 
 
+def note_edit(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    return render(request, 'mainscreen/note_edit.html', {'note': note})
+
+
 class TrainingDelete(DeleteView):
     model = Post
     success_url = 'http://127.0.0.1:8000/'
@@ -68,6 +73,12 @@ class ExerciseDelete(DeleteView):
     model = Exercise
     success_url = 'http://127.0.0.1:8000/'
     template_name = 'mainscreen/exercise_delete.html'
+
+
+class NoteDelete(DeleteView):
+    model = Note
+    success_url = 'http://127.0.0.1:8000/notes'
+    template_name = 'mainscreen/note_delete.html'
 
 
 class RegisterUser(CreateView):

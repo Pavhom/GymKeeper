@@ -1,32 +1,43 @@
 {% extends 'mainscreen/body.html' %}
 {% block content %}
 <div class="container mt-3">
-    <h1>Leave a note</h1>
-    <div class="field inline">
-        <form action="" method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-sm-3">
-                    {{ form.note_text }}
-                </div>
-                <div class="col align-bottom">
-                    <button type="submit" class="btn btn-success btn-sm">Save</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <hr>
 
-    {% for note in notes %}
-        <div class="row main_content bg-dark text-white align-items-center">
-            <div class="col text-break">
-                <h1><a class="btn btn-outline-light" role="button" href="#">{{ note }}</a></h1>
-            </div>
-            <div class="col-sm-2">
-                <a class="btn btn-danger btn-sm" role="button" href="#">Delete</a>
+    <div class="row">
+        <div class="col">
+<!--            возможно потребуется убрать или редактировать div container fluid для нормального отображения -->
+            <div class="container-fluid">
+                <h1>Leave a note</h1>
+                <div class="field inline">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-5">
+                                {{ form.note_text }}
+                            </div>
+                            <div class="col align-bottom">
+                                <button type="submit" class="btn btn-success btn-sm">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    {% endfor %}
-<br>
+        <div class="col">
+            <div class="container-fluid">
+                {% for note in notes %}
+                    <div class="row w-100 main_content bg-dark text-white align-items-center">
+                        <div class="col text-break">
+                            <h1><a class="btn btn-outline-light" role="button">{{ note }}</a></h1>
+                        </div>
+                        <div class="col-sm-2">
+                            <div><a class="btn btn-danger btn-sm" role="button" href="{% url 'note_delete' note.id %}">Delete</a></div>
+                            <br>
+                            <div><a class="btn btn-primary btn-sm" role="button" href="{% url 'note_edit' pk=note.pk %}">Edit</a></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
