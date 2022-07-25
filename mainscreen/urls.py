@@ -11,7 +11,7 @@ urlpatterns = [
     path('post/<int:pk>/delete', views.TrainingDelete.as_view(), name='delete'),
     path('post/<int:pk>/exercise_delete', views.ExerciseDelete.as_view(), name='exercise_delete'),
     path('notes/', views.notes_list, name='notes_list'),
-    path('notes/<int:pk>/', views.note_edit, name='note_edit'),
+    path('notes/<int:pk>/', views.NoteUpdate.as_view(), name='note_edit'),
     path('notes/<int:pk>/note_delete', views.NoteDelete.as_view(), name='note_delete'),
 
 ]

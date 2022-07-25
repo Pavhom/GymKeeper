@@ -3,8 +3,13 @@
 {% block content %}
 <div class="container mt-3">
     <div>
-        <h1>{{ note }}</h1>
+        <h1>Edit note</h1>
     </div> <hr>
-
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>{{ form.note_text }}</div>
+        <br>
+        <div><button class="btn btn-success btn-sm" type="submit">Save</button></div>
+    </form>
 </div>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, CreateView
+from django.views.generic import DeleteView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
@@ -58,9 +58,11 @@ def training_detail(request, pk):
     return render(request, 'mainscreen/training_detail.html', {'post': post, 'exercise': exercise, 'form': form})
 
 
-def note_edit(request, pk):
-    note = get_object_or_404(Note, pk=pk)
-    return render(request, 'mainscreen/note_edit.html', {'note': note})
+class NoteUpdate(UpdateView):
+    model = Note
+    form_class = NoteForm
+    template_name = 'mainscreen/note_edit.html'
+    success_url = reverse_lazy('notes_list')
 
 
 class TrainingDelete(DeleteView):
