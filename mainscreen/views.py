@@ -65,9 +65,8 @@ def note_edit(request, pk):
 
 class TrainingDelete(DeleteView):
     model = Post
-    success_url = 'http://127.0.0.1:8000/'
     template_name = 'mainscreen/delete.html'
-
+    success_url = reverse_lazy('post_list')
 
 class ExerciseDelete(DeleteView):
     model = Exercise
@@ -77,8 +76,8 @@ class ExerciseDelete(DeleteView):
 
 class NoteDelete(DeleteView):
     model = Note
-    success_url = 'http://127.0.0.1:8000/notes'
     template_name = 'mainscreen/note_delete.html'
+    success_url = reverse_lazy('notes_list')
 
 
 class RegisterUser(CreateView):

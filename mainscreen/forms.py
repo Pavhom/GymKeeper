@@ -1,6 +1,6 @@
 from django import forms
 from .models import Post, Exercise, Note
-from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField
+from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField, Textarea
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -21,6 +21,7 @@ class NoteForm(ModelForm):
     class Meta:
         model = Note
         fields = ('note_text',)
+        widgets = {'note_text': forms.Textarea(attrs={'cols': 70, 'rows': 7})}
 
 
 class RegisterUserForm(UserCreationForm):
