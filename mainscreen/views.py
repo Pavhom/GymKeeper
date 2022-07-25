@@ -49,7 +49,6 @@ def training_detail(request, pk):
         form = ExerciseForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            # form.post = Post.objects.get(pk=pk)
             form.tr_post = post
             form.save()
             return redirect(training_detail, pk)
@@ -69,6 +68,7 @@ class TrainingDelete(DeleteView):
     model = Post
     template_name = 'mainscreen/delete.html'
     success_url = reverse_lazy('post_list')
+
 
 class ExerciseDelete(DeleteView):
     model = Exercise

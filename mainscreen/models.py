@@ -31,6 +31,7 @@ class Exercise(models.Model):
         return self.exercise
 
 
+
 class Note(models.Model):
     note_author = models.ForeignKey(User, related_name='note_author', blank=True, null=True, on_delete=models.CASCADE)
     note_text = models.TextField(default=None)
