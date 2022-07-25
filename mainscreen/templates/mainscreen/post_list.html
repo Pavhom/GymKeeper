@@ -6,11 +6,11 @@
         <form action="" method="post">
             {% csrf_token %}
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-2">
                     {{ form.training_name }}
 <!--                    {{ form.created_date }}-->
                 </div>
-                <div class="col align-bottom">
+                <div class="col mx-3 align-bottom">
                     <button type="submit" class="btn btn-success btn-sm">Save</button>
                 </div>
             </div>
