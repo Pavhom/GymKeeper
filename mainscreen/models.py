@@ -22,7 +22,7 @@ class Post(models.Model):
 
 class Exercise(models.Model):
     tr_post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    exercise = models.CharField(default=None, max_length=200)
+    exercise = models.CharField(default=None, max_length=100)
     sets_count = models.PositiveIntegerField(default=0)
     reps_count = models.PositiveIntegerField(default=0)
     weight = models.PositiveIntegerField(default=0)
@@ -30,6 +30,9 @@ class Exercise(models.Model):
     def __str__(self):
         return self.exercise
 
+    @property
+    def tonnage(self):
+        return self.sets_count * self.reps_count * self.weight
 
 
 class Note(models.Model):

@@ -12,6 +12,7 @@
                 <th>Sets count</th>
                 <th>Reps count</th>
                 <th>Weight</th>
+                <th>Ex.tonnage</th>
                 <th>Delete?</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ ex.sets_count }}</td>
                 <td>{{ ex.reps_count }}</td>
                 <td>{{ ex.weight }}</td>
+                <td>{{ ex.tonnage }}</td>
                 <td><a class="btn btn-danger btn-sm" role="button" href="{% url 'exercise_delete' ex.id %}">Delete</a></td>
             </tr>
         </tbody>

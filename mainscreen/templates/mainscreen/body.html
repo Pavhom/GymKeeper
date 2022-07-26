@@ -28,7 +28,12 @@
                     <a class="nav-link">{{ user.username }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Sign Out</a></li>
+                    <div class="vr d-none d-lg-flex h-100 mx-lg-1 text-white"></div>
+                    <hr class="d-lg-none text-white-50">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
+                </li>
             </ul>
         </div>
     </div>
