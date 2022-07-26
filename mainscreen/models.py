@@ -26,13 +26,17 @@ class Exercise(models.Model):
     sets_count = models.PositiveIntegerField(default=0)
     reps_count = models.PositiveIntegerField(default=0)
     weight = models.PositiveIntegerField(default=0)
+    exercise_tonnage = models.IntegerField(default=0)
 
     def __str__(self):
         return self.exercise
 
-    @property
     def tonnage(self):
         return self.sets_count * self.reps_count * self.weight
+
+    def save(self, *args, **kwargs):
+        self.exercise_tonnage = self.tonnage()
+        super(Exercise, self).save(*args, **kwargs)
 
 
 class Note(models.Model):

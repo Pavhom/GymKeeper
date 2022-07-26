@@ -9,6 +9,7 @@ from datetime import date
 from .models import Post, Exercise, Note
 from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm
 from django.contrib.auth.models import User
+from django.db.models import F, Sum
 # Create your views here.
 
 @login_required
@@ -45,6 +46,7 @@ def notes_list(request):
 def training_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     exercise = Exercise.objects.filter(tr_post=pk)
+    total_tonnage = Exercise.objects.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
     if request.method == "POST":
         form = ExerciseForm(request.POST)
         if form.is_valid():
@@ -54,7 +56,7 @@ def training_detail(request, pk):
             return redirect(training_detail, pk)
     else:
         form = ExerciseForm()
-    return render(request, 'mainscreen/training_detail.html', {'post': post, 'exercise': exercise, 'form': form})
+    return render(request, 'mainscreen/training_detail.html', {'post': post, 'exercise': exercise, 'form': form, 'total_tonnage': total_tonnage})
 
 
 class NoteUpdate(UpdateView):

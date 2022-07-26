@@ -13,7 +13,7 @@
                 <th>Reps count</th>
                 <th>Weight</th>
                 <th>Ex.tonnage</th>
-                <th>Delete?</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -24,12 +24,23 @@
                 <td>{{ ex.sets_count }}</td>
                 <td>{{ ex.reps_count }}</td>
                 <td>{{ ex.weight }}</td>
-                <td>{{ ex.tonnage }}</td>
+                <td>{{ ex.exercise_tonnage }}</td>
                 <td><a class="btn btn-danger btn-sm" role="button" href="{% url 'exercise_delete' ex.id %}">Delete</a></td>
             </tr>
         </tbody>
         {% endfor %}
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><div class='d-flex justify-content-end'><h5>Total:</h5></div></td>
+                <td><h5>{{ total_tonnage }}</h5></td>
+                <td></td>
+            </tr>
+        </tbody>
     </table>
+
     <form action="" method="post">
         {% csrf_token %}
 <!--        {{ form.as_p }}-->
