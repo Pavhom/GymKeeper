@@ -95,7 +95,7 @@ class TrainingDelete(DeleteView):
 
 class ExerciseDelete(DeleteView):
     model = Exercise
-    success_url = 'http://127.0.0.1:8000/'
+    success_url = '/'
     template_name = 'mainscreen/exercise_delete.html'
 
 
