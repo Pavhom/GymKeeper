@@ -86,24 +86,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8e6rgb94id8sr',
-        'USER': 'shderkbdkyujke',
-        'PASSWORD': '4dc1977d718e5d7a444527db24d4eda2c9cf17cb3ced048977abdff33d4f98fc',
-        'HOST': 'ec2-34-248-169-69.eu-west-1.compute.amazonaws.com',
+        'NAME': 'gymkeepdb',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'gymkeepdb',
-#         'USER': 'admin',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
