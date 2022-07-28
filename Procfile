@@ -1,1 +1,1 @@
-web: gunicorn gymkeeper.wsgi
+web: gunicorn mainscreen.wsgi
