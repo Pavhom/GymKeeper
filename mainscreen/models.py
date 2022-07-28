@@ -11,7 +11,6 @@ class Post(models.Model):
     training_name = models.CharField(default=None, max_length=200)
     created_date = models.DateField(default=date.today)
 
-
     # def publish(self):
     #     # self.created_date = date.today()
     #     self.save()
