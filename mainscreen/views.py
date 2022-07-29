@@ -64,6 +64,10 @@ def notes_list(request):
     return render(request, 'mainscreen/notes.html', {'notes': notes, 'form': form, 'page': page})
 
 
+# def photo(request):
+#     pass
+
+
 def training_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     exercise = Exercise.objects.filter(tr_post=pk)
