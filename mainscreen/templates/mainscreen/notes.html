@@ -29,7 +29,7 @@
                 {% for note in notes %}
                     <div class="row w-100 main_content bg-dark text-white align-items-center">
                         <div class="col text-break">
-                            <h1><a class="btn btn-outline-light" role="button">{{ note }}</a></h1>
+                            <p>{{ note }}</p>
                         </div>
                         <div class="col-sm-2">
                             <div><a class="btn btn-danger btn-sm" role="button" href="{% url 'note_delete' note.id %}">Delete</a></div>
