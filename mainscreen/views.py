@@ -6,8 +6,8 @@ from django.views.generic import DeleteView, CreateView, UpdateView, ListView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
-from .models import Post, Exercise, Note
-from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm
+from .models import Post, Exercise, Note, Photo
+from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -64,8 +64,19 @@ def notes_list(request):
     return render(request, 'mainscreen/notes.html', {'notes': notes, 'form': form, 'page': page})
 
 
-# def photo(request):
-#     pass
+def photo(request):
+    photos = Photo.objects.filter(photo_author=request.user)
+    # this part is responsible for adding a new notes
+    if request.method == "POST":
+        form = AddPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.photo_author = request.user
+            form.save()
+            return redirect(photo)
+    else:
+        form = AddPhotoForm()
+    return render(request, 'mainscreen/photo.html', {'photos': photos, 'form': form})
 
 
 def training_detail(request, pk):

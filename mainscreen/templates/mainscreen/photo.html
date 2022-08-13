@@ -2,7 +2,37 @@
 {% load static %}
 {% block content %}
 <div class="container mt-3">
-    <h1>Leave a note</h1>
-
+    <h1>Your photo</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-2">
+                {{ form.title }}
+            </div>
+            <div class="col-2">
+                {{ form.im_photo }}
+            </div>
+            <div class="col mx-3 align-bottom">
+                <button type="submit" class="btn btn-success btn-sm">Upload</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <div class="container " style="padding-top: 5%;">
+    <div class="row">
+        {% for x in photos %}
+        <div class="col-md-4">
+          <div class="thumbnail">
+            <a href="{{ x.im_photo.url }}">
+              <img src="{{ x.im_photo.url }}" alt="Lights" style="width:100%">
+              <div class="caption">
+                <p>{{ x.title }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+        </div>
 </div>
 {% endblock %}

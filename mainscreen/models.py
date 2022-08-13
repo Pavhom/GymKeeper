@@ -10,10 +10,6 @@ class Post(models.Model):
     training_name = models.CharField(default=None, max_length=200)
     created_date = models.DateField(default=date.today)
 
-    # def publish(self):
-    #     # self.created_date = date.today()
-    #     self.save()
-
     def __str__(self):
         return self.training_name
 
@@ -44,3 +40,12 @@ class Note(models.Model):
 
     def __str__(self):
         return self.note_text
+
+
+class Photo(models.Model):
+    photo_author = models.ForeignKey(User, related_name='photo_author', blank=True, null=True, on_delete=models.CASCADE)
+    title = models.CharField(default=None, max_length=50)
+    im_photo = models.ImageField(upload_to=lambda instance, filename: 'user_{0}/{1}'.format(instance.photo_author, filename))
+
+    def __str__(self):
+        return self.title
