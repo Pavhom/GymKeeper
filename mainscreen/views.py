@@ -123,4 +123,3 @@ class LoginUser(LoginView):
 def logout_user(request):
     auth_logout(request)
     return redirect('login')
-
