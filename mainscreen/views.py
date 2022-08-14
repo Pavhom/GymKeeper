@@ -65,7 +65,7 @@ def notes_list(request):
 
 
 def photo(request):
-    photos = Photo.objects.filter(photo_author=request.user)
+    photos = Photo.objects.filter(photo_author=request.user).order_by('created_date')[::-1]
     # this part is responsible for adding a new notes
     if request.method == "POST":
         form = AddPhotoForm(request.POST, request.FILES)
@@ -118,6 +118,12 @@ class NoteDelete(DeleteView):
     model = Note
     template_name = 'mainscreen/note_delete.html'
     success_url = reverse_lazy('notes_list')
+
+
+class PhotoDelete(DeleteView):
+    model = Photo
+    template_name = 'mainscreen/photo_delete.html'
+    success_url = reverse_lazy('photo')
 
 
 class RegisterUser(CreateView):

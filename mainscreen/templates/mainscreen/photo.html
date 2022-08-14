@@ -12,27 +12,34 @@
             <div class="col-2">
                 {{ form.im_photo }}
             </div>
-            <div class="col mx-3 align-bottom">
+            <div class="col-2 mx-1 align-bottom">
                 <button type="submit" class="btn btn-success btn-sm">Upload</button>
             </div>
         </div>
     </form>
     <hr>
-    <div class="container " style="padding-top: 5%;">
+
     <div class="row">
         {% for x in photos %}
-        <div class="col-md-4">
-          <div class="thumbnail">
-            <a href="{{ x.im_photo.url }}">
-              <img src="{{ x.im_photo.url }}" alt="Lights" style="width:100%">
-              <div class="caption">
-                <p>{{ x.title }}</p>
-              </div>
-            </a>
-          </div>
-        </div>
+            <div class="col-md-3">
+                <a href="{{ x.im_photo.url }}" style="">
+                    <img src="{{ x.im_photo.url }}" alt="Lights" style="width:100%; padding-bottom: 5px">
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <p>{{ x.title }}</p>
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-danger" role="button" href="{% url 'photo_delete' x.id %}"
+                            style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         {% endfor %}
       </div>
-        </div>
 </div>
 {% endblock %}
+

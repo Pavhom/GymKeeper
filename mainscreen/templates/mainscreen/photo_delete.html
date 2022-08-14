@@ -1,0 +1,14 @@
+{% extends 'mainscreen/body.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h1>Delete photo?</h1>
+    <hr>
+    <div class="field inline">
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

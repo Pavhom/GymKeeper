@@ -42,10 +42,16 @@ class Note(models.Model):
         return self.note_text
 
 
+# function for forming the way to save the photo
+def upload_file_path(instance, filename):
+    return 'user_{0}/{1}'.format(instance.photo_author, filename)
+
+
 class Photo(models.Model):
     photo_author = models.ForeignKey(User, related_name='photo_author', blank=True, null=True, on_delete=models.CASCADE)
     title = models.CharField(default=None, max_length=50)
-    im_photo = models.ImageField(upload_to=lambda instance, filename: 'user_{0}/{1}'.format(instance.photo_author, filename))
+    created_date = models.DateTimeField(default=timezone.now)
+    im_photo = models.ImageField(upload_to=upload_file_path)
 
     def __str__(self):
         return self.title
