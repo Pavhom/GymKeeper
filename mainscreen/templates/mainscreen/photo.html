@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container mt-3">
-    <h1>Your photo</h1>
+    <h1>Upload a photo</h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
@@ -20,26 +20,30 @@
     <hr>
 
     <div class="row">
-        {% for x in photos %}
-            <div class="col-md-3">
-                <a href="{{ x.im_photo.url }}" style="">
-                    <img src="{{ x.im_photo.url }}" alt="Lights" style="width:100%; padding-bottom: 5px">
-                </a>
-                <div class="row">
+        {% for photo in photos %}
+            <div class="col-md-3 mb-2">
+                <div class="bg-dark text-white">
+                <div>
+                    <a href="{{ photo.im_photo.url }}">
+                        <img src="{{ photo.im_photo.url }}" alt="Lights" style="width:100%; padding-bottom: 5px">
+                    </a>
+                </div>
+
+                <div class="row m-1">
                     <div class="col">
-                        <p>{{ x.title }}</p>
+                        <p>{{ photo.title }}</p>
                     </div>
+
                     <div class="col-auto">
-                        <a class="btn btn-danger" role="button" href="{% url 'photo_delete' x.id %}"
-                            style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                            Delete
+                        <a class="btn btn-danger" role="button" href="{% url 'photo_delete' photo.id %}">
+                            <i class="bi bi-x-circle"></i>
                         </a>
                     </div>
                 </div>
+                </div>
             </div>
-
         {% endfor %}
-      </div>
+    </div>
 </div>
 {% endblock %}
 
