@@ -24,7 +24,10 @@
             <div class="col-md-3 mb-2">
                 <div class="bg-dark text-white">
                 <div>
-                    <a href="{{ photo.im_photo.url }}">
+                    <a data-fancybox="responsive" data-src="{{ photo.im_photo.url }}"
+                       data-srcset="{{ photo.im_photo.url }} 240w, {{ photo.im_photo.url }} 400w"
+                       data-sizes="(max-width: 800px) 680px, 800px"
+                       data-caption="{{ photo.title }}">
                         <img src="{{ photo.im_photo.url }}" alt="Lights" style="width:100%; padding-bottom: 5px">
                     </a>
                 </div>
@@ -45,5 +48,10 @@
         {% endfor %}
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+<script>
+
+</script>
 {% endblock %}
 
