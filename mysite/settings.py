@@ -33,14 +33,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+    'social_django',
     'mainscreen',
     'bootstrap4',
 ]
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
-# LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
-# LOGIN_URL = 'http://127.0.0.1:8000/login/'
 # LOGOUT_REDIRECT_URL = ''
 
 MIDDLEWARE = [
@@ -71,6 +70,24 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # 'social_core.backends.facebook.FacebookBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.twitter.TwitterBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# FACEBOOK_APP_ID = ''
+# FACEBOOK_API_SECRET = ''
+#
+# TWITTER_CONSUMER_KEY = ''
+# TWITTER_CONSUMER_SECRET = ''
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '889429912532-lo2q10huo5ujqrcu1kqhe8g2pc3jqu5c.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
