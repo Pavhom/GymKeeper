@@ -3,11 +3,15 @@ from .models import Post, Exercise, Note, Photo
 # Register your models here.
 
 
-class imageAdmin(admin.ModelAdmin):
-    list_display = ["title", "im_photo"]
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ["title", "photo_author", "image_data"]
+
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ["training_name", "created_date", "author"]
 
 
 admin.site.register(Exercise)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 admin.site.register(Note)
-admin.site.register(Photo, imageAdmin)
+admin.site.register(Photo, ImageAdmin)

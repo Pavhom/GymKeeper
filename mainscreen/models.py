@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from datetime import date
 from django.contrib.auth.models import User
+from django.utils.html import format_html
 
 
 class Post(models.Model):
@@ -12,6 +13,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.training_name
+
+    class Meta:
+        verbose_name = 'Training'
 
 
 class Exercise(models.Model):
@@ -52,6 +56,10 @@ class Photo(models.Model):
     title = models.CharField(default=None, max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     im_photo = models.ImageField(upload_to=upload_file_path)
+
+    # image_data is used to display the preview in the admin panel
+    def image_data(self):
+        return format_html('<img src="{}" width="50px"/>', self.im_photo.url)
 
     def __str__(self):
         return self.title
