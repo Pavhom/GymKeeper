@@ -32,9 +32,10 @@
                 </form>
                 <div class="align-items-center">
                     <p>Don't have an GymKeep<br>account?</p>
-                    <a class="btn btn-success btn-sm" role="button" href="{% url 'register' %}">Sign Up</a>
-                    <a class="btn btn-light" href="{% url 'social:begin' 'google-oauth2' %}"><i class="bi bi-google"></i>
-                    </a>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-success btn-sm" role="button" href="{% url 'register' %}">Sign Up</a>
+                        <a class="btn btn-light" href="{% url 'social:begin' 'google-oauth2' %}"><i class="bi bi-google"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
