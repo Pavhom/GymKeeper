@@ -5,14 +5,15 @@
     <div>
         <h1>{{ post.training_name }} - {{ post.created_date }}</h1>
     </div> <hr>
+    <div>
     <table class="table" width="50%">
         <thead>
             <tr>
                 <th>Exercise</th>
-                <th>Sets count</th>
-                <th>Reps count</th>
+                <th>Sets</th>
+                <th>Reps</th>
                 <th>Weight</th>
-                <th>Ex.tonnage</th>
+                <th>Tonnage</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,12 +26,12 @@
                 <td>{{ ex.reps_count }}</td>
                 <td>{{ ex.weight }}</td>
                 <td>{{ ex.exercise_tonnage }}</td>
-                <td><a class="btn btn-danger btn-sm" role="button" href="{% url 'exercise_delete' ex.id %}">Delete</a></td>
+                <td><a class="btn btn-danger btn-sm" role="button" href="{% url 'exercise_delete' ex.id %}"><i class="bi bi-x-circle"></i></a></td>
             </tr>
         </tbody>
         {% endfor %}
     </table>
-
+    </div>
     <form action="" method="post">
         {% csrf_token %}
 <!--        {{ form.as_p }}-->

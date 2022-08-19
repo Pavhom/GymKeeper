@@ -9,6 +9,11 @@ class ExerciseForm(ModelForm):
     class Meta:
         model = Exercise
         fields = ('exercise', 'sets_count', 'reps_count', 'weight')
+        widgets = {'exercise': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   'sets_count': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   'reps_count': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   'weight': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   }
 
 
 class PostForm(ModelForm):
@@ -32,6 +37,7 @@ class AddPhotoForm(ModelForm):
         widgets = {'title': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
                    'im_photo': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'type': 'file'}),
                    }
+
 
 class RegisterUserForm(UserCreationForm):
     username = CharField(label='Username', widget=TextInput(attrs={'class': 'form-input'}))

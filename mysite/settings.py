@@ -75,7 +75,7 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    # 'social_core.backends.facebook.FacebookBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.google.GoogleOAuth2',
     # 'social_core.backends.twitter.TwitterBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -83,8 +83,8 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-# FACEBOOK_APP_ID = ''
-# FACEBOOK_API_SECRET = ''
+FACEBOOK_APP_ID = '782473663099852'
+FACEBOOK_API_SECRET = 'd2c2ada5de30e00c2207a4a10e0dea8b'
 #
 # TWITTER_CONSUMER_KEY = ''
 # TWITTER_CONSUMER_SECRET = ''
