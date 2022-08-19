@@ -3,44 +3,33 @@
 {% block content %}
 <div class="container mt-3">
     <h1>Leave a note</h1>
-    <hr>
     <div class="row">
-        <div class="col">
-<!--            возможно потребуется убрать или редактировать div container fluid для нормального отображения -->
-            <div class="container-fluid">
-                <div class="row w-100">
-                    <div class="field inline">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <div class="col-sm-5">
-                                {{ form.note_text }}
-                            </div>
-                            <br>
-                            <div class="col align-bottom">
-                                <button type="submit" class="btn btn-success btn-sm">Save</button>
-                            </div>
-                        </form>
-                    </div>
+        <div class="field inline">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="col-sm-5 pb-1">
+                    {{ form.note_text }}
+                </div>
+                <div class="col align-bottom">
+                    <button type="submit" class="btn btn-success btn-sm">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="container-fluid">
+        {% for note in notes %}
+            <div class="row w-100 main_content bg-dark text-white align-items-center me_auto">
+                <div class="col text-break">
+                    <p>{{ note }}</p>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-danger btn-sm" role="button" href="{% url 'note_delete' note.id %}">Delete</a>
+                    <a class="btn btn-primary btn-sm" role="button" href="{% url 'note_edit' pk=note.pk %}">Edit</a>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="container-fluid">
-                {% for note in notes %}
-                    <div class="row w-100 main_content bg-dark text-white align-items-center">
-                        <div class="col text-break">
-                            <p>{{ note }}</p>
-                        </div>
-                        <div class="col-sm-2">
-                            <div><a class="btn btn-danger btn-sm" role="button" href="{% url 'note_delete' note.id %}">Delete</a></div>
-                            <br>
-                            <div><a class="btn btn-primary btn-sm" role="button" href="{% url 'note_edit' pk=note.pk %}">Edit</a></div>
-                        </div>
-                    </div>
-                {% endfor %}
-                {% include "mainscreen/pagination.html" with page=notes %}
-            </div>
-        </div>
+        {% endfor %}
+        {% include "mainscreen/pagination.html" with page=notes %}
     </div>
 </div>
 {% endblock %}

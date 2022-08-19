@@ -1,20 +1,23 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=1200, height=700">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Gym Keep</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
     <link rel="stylesheet" href="{% static 'css/mainscreen.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <img src="{% static 'logo_mini.png' %}">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-3">
+        <a class="navbar-brand"><img src="{% static 'logo_mini.png' %}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Main</a>
                 </li>
@@ -27,7 +30,7 @@
             </ul>
 
             <ul class="navbar-nav text-right">
-                <li class="nav-item usercolor">
+                <li class="nav-item">
                     <a class="nav-link">{{ user.username }}</a>
                 </li>
                 <li class="nav-item">

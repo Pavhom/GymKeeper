@@ -1,6 +1,6 @@
 from django import forms
 from .models import Post, Exercise, Note, Photo
-from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField, Textarea
+from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -15,20 +15,23 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ('training_name',)
+        widgets = {'training_name': forms.TextInput(attrs={'class': 'form-control form-control-sm'})}
 
 
 class NoteForm(ModelForm):
     class Meta:
         model = Note
         fields = ('note_text',)
-        widgets = {'note_text': forms.Textarea(attrs={'cols': 70, 'rows': 7})}
+        widgets = {'note_text': forms.Textarea(attrs={'class': 'form-control', 'rows': 4})}
 
 
 class AddPhotoForm(ModelForm):
     class Meta:
         model = Photo
         fields = ('title', 'im_photo')
-
+        widgets = {'title': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   'im_photo': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'type': 'file'}),
+                   }
 
 class RegisterUserForm(UserCreationForm):
     username = CharField(label='Username', widget=TextInput(attrs={'class': 'form-input'}))
