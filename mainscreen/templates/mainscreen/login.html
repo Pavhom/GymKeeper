@@ -11,13 +11,13 @@
 <div class="container d-flex h-100 justify-content-center align-items-center">
     <div class="row align-items-center text-center">
         <div class="col">
-            <img class="w-50" style="width=50%" src="{% static 'logo.png' %}">
+            <img class="w-50" src="{% static 'logo.png' %}">
         </div>
         <hr>
         <div class="col text-white">
             <h1>Login</h1>
             {% for err in form.non_field_errors %}
-                <small class="text-danger" style>{{ err }}</small>
+                <small class="text-danger">{{ err }}</small>
             {% endfor %}
             <form action="" method="post">
                 {% csrf_token %}
