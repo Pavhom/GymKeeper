@@ -18,7 +18,7 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xlx+)=db=_t!36#&kcy%(wq=d662mwb3mn0cty=j=p0rl!n_jn'
+SECRET_KEY = ''
 
 DEBUG = True
 
@@ -83,14 +83,14 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-FACEBOOK_APP_ID = '782473663099852'
-FACEBOOK_API_SECRET = 'd2c2ada5de30e00c2207a4a10e0dea8b'
+FACEBOOK_APP_ID = ''
+FACEBOOK_API_SECRET = ''
 #
 # TWITTER_CONSUMER_KEY = ''
 # TWITTER_CONSUMER_SECRET = ''
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '889429912532-lo2q10huo5ujqrcu1kqhe8g2pc3jqu5c.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
