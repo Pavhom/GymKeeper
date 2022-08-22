@@ -17,7 +17,7 @@
         <div class="col text-white">
             <h1>Login</h1>
             {% for err in form.non_field_errors %}
-                <small class="text-danger">{{ err }}</small>
+                <div class="text-danger text-wrap" style="width: 20rem; margin: 0 auto"><small>{{ err }}</small></div>
             {% endfor %}
             <form action="" method="post">
                 {% csrf_token %}
@@ -32,7 +32,7 @@
                 <button type="submit" class="btn btn-light btn-sm">Log In</button>
             </form>
             <hr>
-            <div class="">
+            <div>
                 <p>Don't have an GymKeep<br>account?</p>
                 <div class="btn-group" role="group">
                     <a class="btn btn-success btn-sm" role="button" href="{% url 'register' %}">Sign Up</a>

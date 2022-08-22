@@ -15,6 +15,11 @@
         <hr>
         <div class="col text-white">
         <h1>Registration</h1>
+        {% for err in form.errors.values %}
+            {% for val in err %}
+            <small class="text-danger">{{ val }}<br></small>
+            {% endfor %}
+        {% endfor %}
         <form method="post">
             {% csrf_token %}
             <div>
@@ -33,7 +38,7 @@
                 <label>Repeat password</label><br>
                 {{ form.password2 }}
             </div><br>
-            <div>{{ form.errors }}</div>
+
             <button type="submit" class="btn btn-light btn-sm">Create</button>
         </form>
         </div>
