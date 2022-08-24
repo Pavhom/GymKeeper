@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, CreateView, UpdateView, ListView
+from django.views.generic import DeleteView, CreateView, UpdateView, ListView, FormView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
@@ -13,20 +13,17 @@ from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
+
+def get_page_context(queryset, request):
+    paginator = Paginator(queryset, 6)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    return page
+
+
 @login_required
 def post_list(request):
-    # display of all workouts
     posts = Post.objects.filter(author=request.user).order_by('created_date')[::-1]
-    # pagination
-    paginator = Paginator(posts, 6)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    # this part is responsible for adding a new workout
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -36,22 +33,11 @@ def post_list(request):
             return redirect(post_list)
     else:
         form = PostForm()
-    return render(request, 'mainscreen/post_list.html', {'posts': posts, 'form': form, 'page': page})
+    return render(request, 'mainscreen/post_list.html', {'posts': posts, 'form': form, 'page': get_page_context(posts, request)})
 
 
 def notes_list(request):
-    # display of all notes
     notes = Note.objects.filter(note_author=request.user).order_by('created_date')[::-1]
-    # pagination
-    paginator = Paginator(notes, 6)
-    page = request.GET.get('page')
-    try:
-        notes = paginator.page(page)
-    except PageNotAnInteger:
-        notes = paginator.page(1)
-    except EmptyPage:
-        notes = paginator.page(paginator.num_pages)
-    # this part is responsible for adding a new notes
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
@@ -61,12 +47,11 @@ def notes_list(request):
             return redirect(notes_list)
     else:
         form = NoteForm()
-    return render(request, 'mainscreen/notes.html', {'notes': notes, 'form': form, 'page': page})
+    return render(request, 'mainscreen/notes.html', {'notes': notes, 'form': form, 'page': get_page_context(notes, request)})
 
 
 def photo(request):
     photos = Photo.objects.filter(photo_author=request.user).order_by('created_date')[::-1]
-    # this part is responsible for adding a new notes
     if request.method == "POST":
         form = AddPhotoForm(request.POST, request.FILES)
         if form.is_valid():

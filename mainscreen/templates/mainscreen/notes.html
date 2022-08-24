@@ -18,18 +18,18 @@
     </div>
     <hr>
     <div class="container-fluid">
-        {% for note in notes %}
+        {% for pg in page %}
             <div class="row w-100 main_content bg-dark text-white align-items-center me_auto">
                 <div class="col text-break">
-                    <p>{{ note }}</p>
+                    <p>{{ pg }}</p>
                 </div>
                 <div class="col-sm-3">
-                    <a class="btn btn-danger btn-sm" role="button" href="{% url 'note_delete' note.id %}">Delete</a>
-                    <a class="btn btn-primary btn-sm" role="button" href="{% url 'note_edit' pk=note.pk %}">Edit</a>
+                    <a class="btn btn-danger btn-sm" role="button" href="{% url 'note_delete' pg.id %}">Delete</a>
+                    <a class="btn btn-primary btn-sm" role="button" href="{% url 'note_edit' pk=pg.pk %}">Edit</a>
                 </div>
             </div>
         {% endfor %}
-        {% include "mainscreen/pagination.html" with page=notes %}
+        {% include "mainscreen/pagination.html" with page=page %}
     </div>
 </div>
 {% endblock %}
