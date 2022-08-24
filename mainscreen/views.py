@@ -2,16 +2,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, CreateView, UpdateView, ListView, FormView
+from django.views.generic import DeleteView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from datetime import date
 from .models import Post, Exercise, Note, Photo
 from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm
-from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-# Create your views here.
 
 
 def get_page_context(queryset, request):
@@ -67,7 +66,7 @@ def photo(request):
 def training_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     exercise = Exercise.objects.filter(tr_post=pk)
-    total_tonnage = Exercise.objects.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
+    total_tonnage = exercise.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
     if request.method == "POST":
         form = ExerciseForm(request.POST)
         if form.is_valid():
