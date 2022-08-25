@@ -10,7 +10,6 @@ class ImageAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ["training_name", "created_date", "author"]
 
-
 admin.site.register(Exercise)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Note)

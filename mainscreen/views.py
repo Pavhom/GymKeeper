@@ -1,16 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
-from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
-from datetime import date
 from .models import Post, Exercise, Note, Photo
 from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm
 from django.db.models import Sum
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 
 def get_page_context(queryset, request):
@@ -32,7 +28,9 @@ def post_list(request):
             return redirect(post_list)
     else:
         form = PostForm()
-    return render(request, 'mainscreen/post_list.html', {'posts': posts, 'form': form, 'page': get_page_context(posts, request)})
+    return render(request, 'mainscreen/post_list.html', {'posts': posts,
+                                                         'form': form,
+                                                         'page': get_page_context(posts, request)})
 
 
 def notes_list(request):
@@ -46,7 +44,9 @@ def notes_list(request):
             return redirect(notes_list)
     else:
         form = NoteForm()
-    return render(request, 'mainscreen/notes.html', {'notes': notes, 'form': form, 'page': get_page_context(notes, request)})
+    return render(request, 'mainscreen/notes.html', {'notes': notes,
+                                                     'form': form,
+                                                     'page': get_page_context(notes, request)})
 
 
 def photo(request):
@@ -60,7 +60,8 @@ def photo(request):
             return redirect(photo)
     else:
         form = AddPhotoForm()
-    return render(request, 'mainscreen/photo.html', {'photos': photos, 'form': form})
+    return render(request, 'mainscreen/photo.html', {'photos': photos,
+                                                     'form': form})
 
 
 def training_detail(request, pk):
@@ -76,7 +77,10 @@ def training_detail(request, pk):
             return redirect(training_detail, pk)
     else:
         form = ExerciseForm()
-    return render(request, 'mainscreen/training_detail.html', {'post': post, 'exercise': exercise, 'form': form, 'total_tonnage': total_tonnage})
+    return render(request, 'mainscreen/training_detail.html', {'post': post,
+                                                               'exercise': exercise,
+                                                               'form': form,
+                                                               'total_tonnage': total_tonnage})
 
 
 class NoteUpdate(UpdateView):
