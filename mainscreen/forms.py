@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Exercise, Note, Photo
+from .models import Post, Exercise, Note, Photo, Chart
 from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -28,6 +28,13 @@ class NoteForm(ModelForm):
         model = Note
         fields = ('note_text',)
         widgets = {'note_text': forms.Textarea(attrs={'class': 'form-control', 'rows': 4})}
+
+
+class ChartForm(ModelForm):
+    class Meta:
+        model = Chart
+        fields = ('title',)
+        widgets = {'title': forms.TextInput(attrs={'class': 'form-control form-control-sm'})}        
 
 
 class AddPhotoForm(ModelForm):

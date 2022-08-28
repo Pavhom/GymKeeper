@@ -4,7 +4,7 @@ from .models import Post, Exercise, Note, Photo
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ["title", "photo_author", "image_data"]
+    list_display = ["title", "author", "image_data"]
 
 
 class PostAdmin(admin.ModelAdmin):

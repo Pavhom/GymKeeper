@@ -1,73 +1,75 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, CreateView, UpdateView, TemplateView, ListView
+from django.views.generic import DeleteView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Post, Exercise, Note, Photo
-from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm
+from .models import Post, Exercise, Note, Photo, Chart
+from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm, ChartForm
 from django.db.models import Sum
 from django.core.paginator import Paginator
 
-import calendar
-from datetime import datetime
-
 
 def get_page_context(queryset, request):
+    """pagination function"""
     paginator = Paginator(queryset, 6)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return page
 
 
-@login_required
-def post_list(request):
-    posts = Post.objects.filter(author=request.user).order_by('created_date')[::-1]
+def form_save(current_form, redct, request):
+    """used for saving forms, redirecting after saving, and assigning an author"""
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = current_form(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             form.author = request.user
             form.save()
-            return redirect(post_list)
+            return redirect(redct)
     else:
-        form = PostForm()
-    return render(request, 'mainscreen/post_list.html', {'posts': posts,
-                                                         'form': form,
-                                                         'page': get_page_context(posts, request)})
+        form = current_form()
+        return form
 
 
+@login_required
+def post_list(request):
+    """creates workouts and displays a list of them"""
+    posts = Post.objects.filter(author=request.user).order_by('created_date')[::-1]
+    form = form_save(PostForm, post_list, request)
+    context = {'posts': posts, 'form': form, 'page': get_page_context(posts, request),}
+    return render(request, 'mainscreen/post_list.html', context)
+
+
+@login_required
 def notes_list(request):
-    notes = Note.objects.filter(note_author=request.user).order_by('created_date')[::-1]
-    if request.method == "POST":
-        form = NoteForm(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.note_author = request.user
-            form.save()
-            return redirect(notes_list)
-    else:
-        form = NoteForm()
-    return render(request, 'mainscreen/notes.html', {'notes': notes,
-                                                     'form': form,
-                                                     'page': get_page_context(notes, request)})
+    """creates notes and displays a list of them"""
+    notes = Note.objects.filter(author=request.user).order_by('created_date')[::-1]
+    form = form_save(NoteForm, notes_list, request)
+    context = {'notes': notes, 'form': form, 'page': get_page_context(notes, request),}
+    return render(request, 'mainscreen/notes.html', context)
 
 
+@login_required
+def create_chart(request):
+    """creates charts and displays a list of them"""
+    charts = Chart.objects.filter(author=request.user).order_by('created_date')[::-1]
+    form = form_save(ChartForm, create_chart, request)
+    context = {'charts': charts, 'form': form,}
+    return render(request, 'mainscreen/chart.html', context)
+
+
+@login_required
 def photo(request):
-    photos = Photo.objects.filter(photo_author=request.user).order_by('created_date')[::-1]
-    if request.method == "POST":
-        form = AddPhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.photo_author = request.user
-            form.save()
-            return redirect(photo)
-    else:
-        form = AddPhotoForm()
-    return render(request, 'mainscreen/photo.html', {'photos': photos,
-                                                     'form': form})
+    """upload photos and display them all"""
+    photos = Photo.objects.filter(author=request.user).order_by('created_date')[::-1]
+    form = form_save(AddPhotoForm, photo, request)
+    context = {'photos': photos, 'form': form,}
+    return render(request, 'mainscreen/photo.html', context)
 
 
+@login_required
 def training_detail(request, pk):
+    """saves and displays exercises within a workout"""
     post = get_object_or_404(Post, pk=pk)
     exercise = Exercise.objects.filter(tr_post=pk)
     total_tonnage = exercise.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
@@ -80,20 +82,8 @@ def training_detail(request, pk):
             return redirect(training_detail, pk)
     else:
         form = ExerciseForm()
-    return render(request, 'mainscreen/training_detail.html', {'post': post,
-                                                               'exercise': exercise,
-                                                               'form': form,
-                                                               'total_tonnage': total_tonnage})
-
-
-class Chart(TemplateView):
-    template_name = 'mainscreen/chart.html'
-
-    # def get_context_data(self, **kwargs):
-    #     c = calendar.TextCalendar()
-    #     context = super().get_context_data(**kwargs)
-    #     context['html_out'] = c.itermonthdays(datetime.today().year, datetime.today().month)
-    #     return context
+    context = {'post': post, 'exercise': exercise, 'form': form, 'total_tonnage': total_tonnage,}
+    return render(request, 'mainscreen/training_detail.html', context)
 
 
 class NoteUpdate(UpdateView):

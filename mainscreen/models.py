@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     """Training, their list is displayed on the main page"""
-    author = models.ForeignKey(User, related_name='author', blank=True, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     training_name = models.CharField(default=None, max_length=200)
     created_date = models.DateField(default=date.today)
 
@@ -18,13 +18,13 @@ class Post(models.Model):
         verbose_name = 'Training'
 
 
-# class Chart(models.Model):
-#     author = models.ForeignKey(User, related_name='author', blank=True, null=True, on_delete=models.CASCADE)
-#     title = models.CharField(default=None, max_length=200)
-#     created_date = models.DateField(default=date.today)
-#
-#     def __str__(self):
-#         return self.title
+class Chart(models.Model):
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    title = models.CharField(default=None, max_length=200)
+    created_date = models.DateField(default=date.today)
+
+    def __str__(self):
+        return self.title
 
 
 class Exercise(models.Model):
@@ -48,7 +48,7 @@ class Exercise(models.Model):
 
 
 class Note(models.Model):
-    note_author = models.ForeignKey(User, related_name='note_author', blank=True, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     note_text = models.TextField(default=None)
     created_date = models.DateTimeField(default=timezone.now)
 
@@ -58,11 +58,11 @@ class Note(models.Model):
 
 # function for forming the way to save the photo
 def upload_file_path(instance, filename):
-    return 'user_{0}/{1}'.format(instance.photo_author, filename)
+    return 'user_{0}/{1}'.format(instance.author, filename)
 
 
 class Photo(models.Model):
-    photo_author = models.ForeignKey(User, related_name='photo_author', blank=True, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     title = models.CharField(default=None, max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     im_photo = models.ImageField(upload_to=upload_file_path)

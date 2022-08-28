@@ -2,17 +2,27 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-3">
-    <h1>SOMETHING</h1>
+    <h1>Enter chart name</h1>
     <div class="field inline">
-
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    {{ form.title }}
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-success btn-sm">Save</button>
+                </div>
+            </div>
+        </form>
     </div>
     <hr>
-<h1>HERE WILL BE SOME STATISTIC</h1>
-    <div class="row">
-        {% for day in html_out %}
-            <div class="col m-1 border bg-dark text-white">{{ day }}</div>
-
-        {% endfor %}
+    {% for chart in charts %}
+    <div class="row main_content bg-dark text-white align-items-center me-auto">
+        <div class="col text-break">
+            <h4>{{ chart.title }}</h4>
+        </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}
