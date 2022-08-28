@@ -1,0 +1,18 @@
+{% extends 'mainscreen/body.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-3">
+    <h1>SOMETHING</h1>
+    <div class="field inline">
+
+    </div>
+    <hr>
+<h1>HERE WILL BE SOME STATISTIC</h1>
+    <div class="row">
+        {% for day in html_out %}
+            <div class="col m-1 border bg-dark text-white">{{ day }}</div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

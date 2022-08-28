@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
+    """Training, their list is displayed on the main page"""
     author = models.ForeignKey(User, related_name='author', blank=True, null=True, on_delete=models.CASCADE)
     training_name = models.CharField(default=None, max_length=200)
     created_date = models.DateField(default=date.today)
@@ -17,7 +18,17 @@ class Post(models.Model):
         verbose_name = 'Training'
 
 
+# class Chart(models.Model):
+#     author = models.ForeignKey(User, related_name='author', blank=True, null=True, on_delete=models.CASCADE)
+#     title = models.CharField(default=None, max_length=200)
+#     created_date = models.DateField(default=date.today)
+#
+#     def __str__(self):
+#         return self.title
+
+
 class Exercise(models.Model):
+    """The model is displayed on the training page"""
     tr_post = models.ForeignKey(Post, on_delete=models.CASCADE)
     exercise = models.CharField(default=None, max_length=100)
     sets_count = models.PositiveIntegerField(default=0)

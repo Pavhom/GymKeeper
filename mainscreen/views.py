@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, CreateView, UpdateView
+from django.views.generic import DeleteView, CreateView, UpdateView, TemplateView, ListView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Post, Exercise, Note, Photo
 from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm
 from django.db.models import Sum
 from django.core.paginator import Paginator
+
+import calendar
+from datetime import datetime
 
 
 def get_page_context(queryset, request):
@@ -22,9 +25,9 @@ def post_list(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
+            form = form.save(commit=False)
+            form.author = request.user
+            form.save()
             return redirect(post_list)
     else:
         form = PostForm()
@@ -38,9 +41,9 @@ def notes_list(request):
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
-            note = form.save(commit=False)
-            note.note_author = request.user
-            note.save()
+            form = form.save(commit=False)
+            form.note_author = request.user
+            form.save()
             return redirect(notes_list)
     else:
         form = NoteForm()
@@ -81,6 +84,16 @@ def training_detail(request, pk):
                                                                'exercise': exercise,
                                                                'form': form,
                                                                'total_tonnage': total_tonnage})
+
+
+class Chart(TemplateView):
+    template_name = 'mainscreen/chart.html'
+
+    # def get_context_data(self, **kwargs):
+    #     c = calendar.TextCalendar()
+    #     context = super().get_context_data(**kwargs)
+    #     context['html_out'] = c.itermonthdays(datetime.today().year, datetime.today().month)
+    #     return context
 
 
 class NoteUpdate(UpdateView):
