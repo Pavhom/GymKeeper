@@ -23,7 +23,7 @@
                 <h4>{{ pg.training_name }} - {{ pg.created_date }}</h4>
             </div>
             <div class="col-sm-3">
-                <a class="btn btn-success btn-sm" role="button" href="{% url 'trainin_detail' pk=pg.pk %}">Open</a>
+                <a class="btn btn-success btn-sm" role="button" href="{% url 'training_detail' pk=pg.pk %}">Open</a>
                 <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' pg.id %}">Delete</a>
             </div>
         </div>

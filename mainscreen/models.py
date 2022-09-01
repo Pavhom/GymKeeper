@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from datetime import date
@@ -45,6 +46,9 @@ class Exercise(models.Model):
     def save(self, *args, **kwargs):
         self.exercise_tonnage = self.tonnage()
         super(Exercise, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('training_detail', kwargs={'pk': self.tr_post_id})
 
 
 class Note(models.Model):

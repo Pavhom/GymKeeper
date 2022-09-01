@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import DeleteView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Exercise, Note, Photo, Chart
 from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm, ChartForm
 from django.db.models import Sum
@@ -17,104 +18,153 @@ def get_page_context(queryset, request):
     return page
 
 
-def form_save(current_form, redct, request):
-    """used for saving forms, redirecting after saving, and assigning an author"""
-    if request.method == "POST":
-        form = current_form(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.author = request.user
-            form.save()
-            return redirect(redct)
-    else:
-        form = current_form()
-        return form
+class TrainingsView(LoginRequiredMixin, CreateView):
+    """displays a list of workouts, saves new ones.
+    Pagination is also enabled via get_context_data.
+    Through form_valid each workout is assigned the current user as the author"""
+    model = Post
+    form_class = PostForm
+    template_name = 'mainscreen/post_list.html'
+    success_url = reverse_lazy('post_list')
+    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        trainings = self.model.objects.filter(author=self.request.user).order_by('created_date')[::-1]
+        context["page"] = get_page_context(trainings, self.request)
+        return context
+
+    def form_valid(self, form):
+        fields = form.save(commit=False)
+        fields.author = self.request.user
+        fields.save()
+        return super().form_valid(form)
 
 
-@login_required
-def post_list(request):
-    """creates workouts and displays a list of them"""
-    posts = Post.objects.filter(author=request.user).order_by('created_date')[::-1]
-    form = form_save(PostForm, post_list, request)
-    context = {'posts': posts, 'form': form, 'page': get_page_context(posts, request),}
-    return render(request, 'mainscreen/post_list.html', context)
+class NotesView(LoginRequiredMixin, CreateView):
+    """displays a list of notes, saves new ones.
+    Pagination is also enabled via get_context_data.
+    Through form_valid each note is assigned the current user as the author"""
+    model = Note
+    form_class = NoteForm
+    template_name = 'mainscreen/notes.html'
+    success_url = reverse_lazy('notes_list')
+    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        notes = self.model.objects.filter(author=self.request.user).order_by('created_date')[::-1]
+        context["page"] = get_page_context(notes, self.request)
+        return context
+
+    def form_valid(self, form):
+        fields = form.save(commit=False)
+        fields.author = self.request.user
+        fields.save()
+        return super().form_valid(form)
 
 
-@login_required
-def notes_list(request):
-    """creates notes and displays a list of them"""
-    notes = Note.objects.filter(author=request.user).order_by('created_date')[::-1]
-    form = form_save(NoteForm, notes_list, request)
-    context = {'notes': notes, 'form': form, 'page': get_page_context(notes, request),}
-    return render(request, 'mainscreen/notes.html', context)
+class ChartsView(LoginRequiredMixin, CreateView):
+    """displays a list of charts, saves new ones.
+    Through form_valid each note is assigned the current user as the author"""
+    model = Chart
+    form_class = ChartForm
+    template_name = 'mainscreen/chart.html'
+    success_url = reverse_lazy('chart')
+    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = self.model.objects.filter(author=self.request.user).order_by('created_date')[::-1]
+        return context
+
+    def form_valid(self, form):
+        fields = form.save(commit=False)
+        fields.author = self.request.user
+        fields.save()
+        return super().form_valid(form)
 
 
-@login_required
-def create_chart(request):
-    """creates charts and displays a list of them"""
-    charts = Chart.objects.filter(author=request.user).order_by('created_date')[::-1]
-    form = form_save(ChartForm, create_chart, request)
-    context = {'charts': charts, 'form': form,}
-    return render(request, 'mainscreen/chart.html', context)
+class PhotosView(LoginRequiredMixin, CreateView):
+    """displays all photos, saves new ones.
+    Through form_valid each photo is assigned the current user as the author"""
+    model = Photo
+    form_class = AddPhotoForm
+    template_name = 'mainscreen/photo.html'
+    success_url = reverse_lazy('photo')
+    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["photos"] = self.model.objects.filter(author=self.request.user).order_by('created_date')[::-1]
+        return context
+
+    def form_valid(self, form):
+        fields = form.save(commit=False)
+        fields.author = self.request.user
+        fields.save()
+        return super().form_valid(form)
 
 
-@login_required
-def photo(request):
-    """upload photos and display them all"""
-    photos = Photo.objects.filter(author=request.user).order_by('created_date')[::-1]
-    form = form_save(AddPhotoForm, photo, request)
-    context = {'photos': photos, 'form': form,}
-    return render(request, 'mainscreen/photo.html', context)
+class TrainingsDetailView(LoginRequiredMixin, CreateView):
+    """displays a list of exercises within the workout, saves new ones.
+    Through form_valid each workout is assigned the current user as the author"""
+    model = Exercise
+    form_class = ExerciseForm
+    template_name = 'mainscreen/training_detail.html'
+    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        exrcise_list = self.model.objects.filter(tr_post=self.kwargs.get('pk'))
+        context['post'] = get_object_or_404(Post, pk=self.kwargs['pk'])
+        context['exercise'] = exrcise_list
+        context['total_tonnage'] = exrcise_list.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
+        return context
+
+    def form_valid(self, form):
+        fields = form.save(commit=False)
+        fields.tr_post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        fields.save()
+        return super().form_valid(form)
 
 
-@login_required
-def training_detail(request, pk):
-    """saves and displays exercises within a workout"""
-    post = get_object_or_404(Post, pk=pk)
-    exercise = Exercise.objects.filter(tr_post=pk)
-    total_tonnage = exercise.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
-    if request.method == "POST":
-        form = ExerciseForm(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.tr_post = post
-            form.save()
-            return redirect(training_detail, pk)
-    else:
-        form = ExerciseForm()
-    context = {'post': post, 'exercise': exercise, 'form': form, 'total_tonnage': total_tonnage,}
-    return render(request, 'mainscreen/training_detail.html', context)
-
-
-class NoteUpdate(UpdateView):
+class NoteUpdate(LoginRequiredMixin, UpdateView):
     model = Note
     form_class = NoteForm
     template_name = 'mainscreen/note_edit.html'
     success_url = reverse_lazy('notes_list')
+    login_url = 'login'
 
 
-class TrainingDelete(DeleteView):
+class TrainingDelete(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'mainscreen/delete.html'
     success_url = reverse_lazy('post_list')
+    login_url = 'login'
 
 
-class ExerciseDelete(DeleteView):
+class ExerciseDelete(LoginRequiredMixin, DeleteView):
     model = Exercise
-    success_url = '/'
     template_name = 'mainscreen/exercise_delete.html'
+    login_url = 'login'
+
+    def get_success_url(self):
+        return reverse_lazy('training_detail', kwargs={'pk': self.object.tr_post_id})
 
 
-class NoteDelete(DeleteView):
+class NoteDelete(LoginRequiredMixin, DeleteView):
     model = Note
     template_name = 'mainscreen/note_delete.html'
     success_url = reverse_lazy('notes_list')
+    login_url = 'login'
 
 
-class PhotoDelete(DeleteView):
+class PhotoDelete(LoginRequiredMixin, DeleteView):
     model = Photo
     template_name = 'mainscreen/photo_delete.html'
     success_url = reverse_lazy('photo')
+    login_url = 'login'
 
 
 class RegisterUser(CreateView):
