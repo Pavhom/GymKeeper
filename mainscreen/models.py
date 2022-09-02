@@ -29,7 +29,7 @@ class Chart(models.Model):
 
 
 class ChartData(models.Model):
-    chart_pk = models.ForeignKey(Chart, on_delete=models.CASCADE)
+    chart_pk = models.ForeignKey(Chart, blank=True, null=True, on_delete=models.CASCADE)
     value = models.PositiveIntegerField(default=0)
     created_date = models.DateField(default=date.today)
 
