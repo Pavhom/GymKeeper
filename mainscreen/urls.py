@@ -17,5 +17,6 @@ urlpatterns = [
     path('notes/<int:pk>/note_delete', views.NoteDelete.as_view(), name='note_delete'),
     # path('chart/', views.ChartsView.as_view(), name='chart'),
     # path('chart/<int:pk>/', views.ChartDetailView.as_view(), name='chart_detail'),
-
+    path('password_change/', views.PasswordChange.as_view(), name='password_change'),
+    path('password_change_done/', views.PasswordChangeDone.as_view(), name='password_change_done'),
 ]

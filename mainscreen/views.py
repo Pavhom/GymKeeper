@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DeleteView, CreateView, UpdateView
-from django.contrib.auth.views import LoginView, auth_logout, login_required
+from django.contrib.auth.views import LoginView, auth_logout, login_required, PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Exercise, Note, Photo, Chart, ChartData
-from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm, ChartForm, ChartDataForm
+from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm, ChartForm, ChartDataForm, PasChangeForm
 from django.db.models import Sum
 from django.core.paginator import Paginator
 
@@ -192,6 +192,16 @@ class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'mainscreen/register.html'
     success_url = reverse_lazy('login')
+
+
+class PasswordChange(LoginRequiredMixin, PasswordChangeView):
+    form_class = PasChangeForm
+    template_name = 'mainscreen/password_change.html'
+    success_url = reverse_lazy('password_change_done')
+
+
+class PasswordChangeDone(LoginRequiredMixin, PasswordChangeDoneView):
+    template_name = 'mainscreen/password_change_done.html'
 
 
 class LoginUser(LoginView):

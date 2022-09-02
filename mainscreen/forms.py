@@ -1,7 +1,7 @@
 from django import forms
 from .models import Post, Exercise, Note, Photo, Chart, ChartData
 from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
 
@@ -64,3 +64,13 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+
+class PasChangeForm(PasswordChangeForm):
+    old_password = CharField(label='Old password', widget=PasswordInput(attrs={'class': 'form-control form-control-sm'}))
+    new_password1 = CharField(label='New password', widget=PasswordInput(attrs={'class': 'form-control form-control-sm'}))
+    new_password2 = CharField(label='Repeat new password', widget=PasswordInput(attrs={'class': 'form-control form-control-sm'}))
+
+    class Meta:
+        model = User
+        fields = ('old_password1', 'new_password1', 'new_password2')
