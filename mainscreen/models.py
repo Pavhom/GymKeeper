@@ -28,6 +28,12 @@ class Chart(models.Model):
         return self.title
 
 
+class ChartData(models.Model):
+    chart_pk = models.ForeignKey(Chart, on_delete=models.CASCADE)
+    value = models.PositiveIntegerField(default=0)
+    created_date = models.DateField(default=date.today)
+
+
 class Exercise(models.Model):
     """The model is displayed on the training page"""
     tr_post = models.ForeignKey(Post, on_delete=models.CASCADE)

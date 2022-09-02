@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Exercise, Note, Photo, Chart
+from .models import Post, Exercise, Note, Photo, Chart, ChartData
 from django.forms import TextInput, ModelForm, PasswordInput, EmailInput, CharField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -34,7 +34,16 @@ class ChartForm(ModelForm):
     class Meta:
         model = Chart
         fields = ('title',)
-        widgets = {'title': forms.TextInput(attrs={'class': 'form-control form-control-sm'})}        
+        widgets = {'title': forms.TextInput(attrs={'class': 'form-control form-control-sm'})}
+
+
+class ChartDataForm(ModelForm):
+    class Meta:
+        model = ChartData
+        fields = ('value', 'created_date',)
+        widgets = {'created_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   'value': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+                   }
 
 
 class AddPhotoForm(ModelForm):

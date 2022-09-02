@@ -1,0 +1,25 @@
+{% extends 'mainscreen/body.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div>
+        <h1>{{ chart.title }}</h1>
+    </div> <hr>
+    {% for obj in chart_data %}
+        {{ obj.value }}{{ obj.created_date }}
+    {% endfor %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-2">
+                <label>Date</label><br>
+                {{ form.created_date }}
+            </div>
+            <div class="col-sm-2">
+                <label>Value</label><br>
+                {{ form.value }}
+            </div>
+        </div><br>
+        <button class="btn btn-success btn-sm" type="submit">Save data</button>
+    </form>
+</div>
+{% endblock %}

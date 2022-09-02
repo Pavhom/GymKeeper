@@ -4,8 +4,8 @@ from django.views.generic import DeleteView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, auth_logout, login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post, Exercise, Note, Photo, Chart
-from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm, ChartForm
+from .models import Post, Exercise, Note, Photo, Chart, ChartData
+from .forms import PostForm, ExerciseForm, RegisterUserForm, NoteForm, AddPhotoForm, ChartForm, ChartDataForm
 from django.db.models import Sum
 from django.core.paginator import Paginator
 
@@ -64,25 +64,46 @@ class NotesView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ChartsView(LoginRequiredMixin, CreateView):
-    """displays a list of charts, saves new ones.
-    Through form_valid each note is assigned the current user as the author"""
-    model = Chart
-    form_class = ChartForm
-    template_name = 'mainscreen/chart.html'
-    success_url = reverse_lazy('chart')
-    login_url = 'login'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page"] = self.model.objects.filter(author=self.request.user).order_by('created_date')[::-1]
-        return context
-
-    def form_valid(self, form):
-        fields = form.save(commit=False)
-        fields.author = self.request.user
-        fields.save()
-        return super().form_valid(form)
+# class ChartsView(LoginRequiredMixin, CreateView):
+#     """displays a list of charts, saves new ones.
+#     Through form_valid each note is assigned the current user as the author"""
+#     model = Chart
+#     form_class = ChartForm
+#     template_name = 'mainscreen/chart.html'
+#     success_url = reverse_lazy('chart')
+#     login_url = 'login'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["page"] = self.model.objects.filter(author=self.request.user).order_by('created_date')[::-1]
+#         return context
+#
+#     def form_valid(self, form):
+#         fields = form.save(commit=False)
+#         fields.author = self.request.user
+#         fields.save()
+#         return super().form_valid(form)
+#
+#
+# class ChartDetailView(LoginRequiredMixin, CreateView):
+#     """displays a list of data within the chart, saves new ones.
+#     Through form_valid, chartdata are linked to chart"""
+#     model = ChartData
+#     form_class = ChartDataForm
+#     template_name = 'mainscreen/chart_detail.html'
+#     login_url = 'login'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['chart'] = get_object_or_404(Chart, pk=self.kwargs['pk'])
+#         context['chart_data'] = self.model.objects.filter(chart_pk=self.kwargs.get('pk'))
+#         return context
+#
+#     def form_valid(self, form):
+#         fields = form.save(commit=False)
+#         fields.chart_pk = get_object_or_404(Chart, pk=self.kwargs['pk'])
+#         fields.save()
+#         return super().form_valid(form)
 
 
 class PhotosView(LoginRequiredMixin, CreateView):
@@ -108,7 +129,7 @@ class PhotosView(LoginRequiredMixin, CreateView):
 
 class TrainingsDetailView(LoginRequiredMixin, CreateView):
     """displays a list of exercises within the workout, saves new ones.
-    Through form_valid each workout is assigned the current user as the author"""
+    Through form_valid, exercises are linked to training"""
     model = Exercise
     form_class = ExerciseForm
     template_name = 'mainscreen/training_detail.html'
