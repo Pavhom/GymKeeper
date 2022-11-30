@@ -1,5 +1,4 @@
 asgiref==3.5.2
-beautifulsoup4==4.11.1
 certifi==2022.6.15
 cffi==1.15.1
 charset-normalizer==2.1.0
@@ -17,7 +16,6 @@ Markdown==3.4.1
 oauthlib==3.2.0
 Pillow==9.2.0
 pipreqs==0.4.11
-psycopg2==2.9.3
 pycparser==2.21
 PyJWT==2.4.0
 python-social-auth==0.2.12
