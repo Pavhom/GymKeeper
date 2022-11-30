@@ -96,14 +96,14 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
-    # 'default': {
-    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #    'NAME': 'gymkeepdb',
-    #    'USER': '',
-    #    'PASSWORD': '',
-    #    'HOST': '',
-    #    'PORT': '',
-    # }
+    'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'postgres',
+       'USER': 'postgres',
+       'PASSWORD': '7528748065Pp
+       'HOST': 'db.vlraualbdxltuuljmvxo.supabase.co',
+       'PORT': '5432',
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
