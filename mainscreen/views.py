@@ -137,7 +137,7 @@ class TrainingsDetailView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        exrcise_list = self.model.objects.filter(tr_post=self.kwargs.get('pk'))
+        exrcise_list = self.model.objects.filter(tr_post=self.kwargs.get('pk')).order_by('id')
         context['post'] = get_object_or_404(Post, pk=self.kwargs['pk'])
         context['exercise'] = exrcise_list
         context['total_tonnage'] = exrcise_list.aggregate(Sum('exercise_tonnage'))['exercise_tonnage__sum']
