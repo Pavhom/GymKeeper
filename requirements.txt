@@ -16,7 +16,6 @@ Markdown==3.4.1
 oauthlib==3.2.0
 Pillow==9.2.0
 pipreqs==0.4.11
-psycopg2==2.7.7
 pycparser==2.21
 PyJWT==2.4.0
 python-social-auth==0.2.12
