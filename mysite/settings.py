@@ -18,11 +18,11 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-xlx+)=db=_t!36#&kcy%(wq=d662mwb3mn0cty=j=p0rl!n_jn'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.sites',
@@ -84,26 +84,26 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-FACEBOOK_APP_ID = ''
-FACEBOOK_API_SECRET = ''
+FACEBOOK_APP_ID = '782473663099852'
+FACEBOOK_API_SECRET = 'd2c2ada5de30e00c2207a4a10e0dea8b'
 #
 # TWITTER_CONSUMER_KEY = ''
 # TWITTER_CONSUMER_SECRET = ''
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '889429912532-lo2q10huo5ujqrcu1kqhe8g2pc3jqu5c.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gymkeepdb',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'gymkeepdb',
+    #    'USER': '',
+    #    'PASSWORD': '',
+    #    'HOST': '',
+    #    'PORT': '',
+    # }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -133,11 +133,13 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
-django_heroku.settings(locals())
+
