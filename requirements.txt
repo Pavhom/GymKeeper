@@ -21,6 +21,7 @@ Markdown==3.4.1
 oauthlib==3.2.0
 Pillow==9.2.0
 pipreqs==0.4.11
+libpq-dev==9.4.3
 psycopg2-binary==2.9.5
 pycparser==2.21
 PyJWT==2.4.0
