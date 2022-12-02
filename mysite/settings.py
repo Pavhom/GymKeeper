@@ -23,7 +23,7 @@ SECRET_KEY = 'django-insecure-xlx+)=db=_t!36#&kcy%(wq=d662mwb3mn0cty=j=p0rl!n_jn
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.sites',
